@@ -20,3 +20,10 @@ library(plyr)
 yLab <- mapvalues(y[,1], labels[,1], as.character(labels[,2]))
 data <- cbind(sub,yLab,meanStdX)
 colnames(data) <- c("subject","activity",as.character(meanStdFeatures))
+
+install.packages("dplyr")
+library(dplyr)
+dataGroup <- group_by(data, subject, activity)
+tidy <- summarise_each(dataGroup, funs(mean))
+
+write.table(tidy, "tidy.txt", row.name=FALSE)
