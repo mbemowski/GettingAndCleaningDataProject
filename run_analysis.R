@@ -15,3 +15,8 @@ y <- rbind(trainY, testY)
 meanStdFeaturesCols <- grepl("std\\(\\)|mean\\(\\)", features[,2])
 meanStdFeatures <- features[meanStdFeaturesCols,2]
 meanStdX <- x[,meanStdFeaturesCols]
+
+library(plyr)
+yLab <- mapvalues(y[,1], labels[,1], as.character(labels[,2]))
+data <- cbind(sub,yLab,meanStdX)
+colnames(data) <- c("subject","activity",as.character(meanStdFeatures))
