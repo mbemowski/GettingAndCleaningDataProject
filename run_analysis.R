@@ -11,3 +11,7 @@ trainSub <- read.table("train/subject_train.txt")
 sub <- rbind(trainSub, testSub)
 x <- rbind(trainX, testX)
 y <- rbind(trainY, testY)
+
+meanStdFeaturesCols <- grepl("std\\(\\)|mean\\(\\)", features[,2])
+meanStdFeatures <- features[meanStdFeaturesCols,2]
+meanStdX <- x[,meanStdFeaturesCols]
